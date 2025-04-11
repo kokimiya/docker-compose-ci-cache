@@ -1,0 +1,36 @@
+name: Docker Compose Build with GHA Cache
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. コードチェックアウト
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # 2. Buildx セットアップ（BuildKit対応）
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # 3. Dockerfileからキャッシュ付きでビルド
+      - name: Build Docker image with GHA cache
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: my-sample-app:v1
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # 4. docker-compose で起動（再ビルド不要）
+      - name: Run with Docker Compose
+        run: docker compose up -d
+
+      # 5. 確認（オプション）
+      - name: Show running containers
+        run: docker ps
