@@ -28,7 +28,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          tags: my-sample-app:v1.0.0
+          tags: my-sample-app:test01
           load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
