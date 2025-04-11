@@ -3,5 +3,6 @@ version: "3.8"
 services:
   app:
     image: my-sample-app:v1  # ビルド済みのイメージを指定
+    # build: ./ ← docker-composeでビルドをせずに、ghaでbuildxからビルドする
     ports:
       - "3000:3000"
