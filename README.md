@@ -1,4 +1,4 @@
-# github-rule
+# docker-compose-ci-cache
 私がGitHub Actionsを理解するためだけのリポジトリ
 
 ## 目的
